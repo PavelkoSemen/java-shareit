@@ -1,6 +1,6 @@
 package ru.practicum.shareit.error;
 
-public class EntityAccessException extends RuntimeException{
+public class EntityAccessException extends RuntimeException {
     public EntityAccessException() {
     }
 

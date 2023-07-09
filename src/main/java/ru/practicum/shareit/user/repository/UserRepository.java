@@ -10,11 +10,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User save(User entity);
 
-    Optional<User> findById(Long aLong);
+    Optional<User> findById(Long id);
+
+    Optional<User> findByEmail(String email);
 
     List<User> findAll();
 
-    void delete(User entity);
+    void deleteById(Long id);
 
     void deleteAll();
 }

@@ -36,7 +36,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @Transactional
     public List<ItemDto> getItemsByFilter(long bookerId, String filter) {
         log.info("Пользователь с id {} ищет вещи с фильтром {}", bookerId, filter);
         if (filter.isBlank()) {
@@ -56,6 +55,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public ItemDto createItem(long ownerId, ItemDto itemDto) {
         log.info("Создание предмета {} у пользователя c id {}", itemDto, ownerId);
         User owner = userRepository.findById(ownerId).orElseThrow(() ->

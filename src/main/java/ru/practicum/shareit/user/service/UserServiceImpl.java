@@ -13,6 +13,7 @@ import ru.practicum.shareit.user.repository.UserRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static ru.practicum.shareit.user.dto.UserMapper.toUser;
 import static ru.practicum.shareit.user.dto.UserMapper.toUserDto;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserDto createUser(UserDto userDto) {
         log.info("Создание пользователя {}", userDto);
         if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAllUsers() {
         log.info("Получение всех пользователей");
-        return userRepository.findAll().stream()
+        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .map(UserMapper::toUserDto)
                 .collect(Collectors.toList());
     }

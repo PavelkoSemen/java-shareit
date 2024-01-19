@@ -29,9 +29,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDto createUser(UserDto userDto) {
         log.info("Создание пользователя {}", userDto);
-        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-            throw new EntitySaveException("Дубликат почты у пользователя: " + userDto);
-        }
         User user = toUser(userDto);
         return toUserDto(userRepository.save(user));
     }

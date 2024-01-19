@@ -7,13 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemRequestRepository extends CrudRepository<ItemRequest, Long> {
-    ItemRequest save(ItemRequest entity);
 
-    Optional<ItemRequest> findById(Long aLong);
-
-    List<ItemRequest> findAll();
-
-    void delete(ItemRequest entity);
-
-    void deleteAll();
 }

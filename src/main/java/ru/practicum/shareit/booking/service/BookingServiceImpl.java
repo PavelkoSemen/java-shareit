@@ -111,8 +111,8 @@ public class BookingServiceImpl implements BookingService {
                     " и конца бронирования " + endDate);
         }
 
-        final boolean isBookedTime = bookingRepository.findByItemIdAndStatus(bookingDto.getItemId()
-                        , BookingStatus.APPROVED)
+        final boolean isBookedTime = bookingRepository.findByItemIdAndStatus(bookingDto.getItemId(),
+                        BookingStatus.APPROVED)
                 .stream()
                 .anyMatch(b -> ((b.getStart().isBefore(startDate)
                         && b.getEnd().isAfter(startDate))

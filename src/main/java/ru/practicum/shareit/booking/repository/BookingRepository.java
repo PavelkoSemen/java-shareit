@@ -61,5 +61,5 @@ public interface BookingRepository extends CrudRepository<Booking, Long> {
     List<Booking> findByItemsId(List<Long> itemsId);
 
 
-    boolean existsByBookerIdAndItemIdAndEndBefore(Long bookerId, Long ItemId, LocalDateTime bookerTime);
+    boolean existsByBookerIdAndItemIdAndEndBefore(Long bookerId, Long itemId, LocalDateTime bookerTime);
 }

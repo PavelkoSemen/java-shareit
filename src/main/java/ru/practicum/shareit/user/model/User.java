@@ -1,11 +1,17 @@
 package ru.practicum.shareit.user.model;
 
-import lombok.*;
-import ru.practicum.shareit.booking.model.Booking;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Builder
@@ -22,6 +28,4 @@ public class User {
     private String name;
     @Column(unique = true)
     private String email;
-    @OneToMany(mappedBy = "booker")
-    private Set<Booking> booking = new HashSet<>();
 }

@@ -13,12 +13,34 @@ import java.util.Date;
 @RestControllerAdvice
 @Slf4j
 public class ErrorHandler {
+    @ExceptionHandler(RequestParameterException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage entityLockedException(RequestParameterException ex, WebRequest request) {
+        log.error(ex.getMessage());
+        return new ErrorMessage(
+                HttpStatus.BAD_REQUEST.value(),
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+    }
+
+    @ExceptionHandler(EntityLockedException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessage entityLockedException(EntityLockedException ex, WebRequest request) {
+        log.error(ex.getMessage());
+        return new ErrorMessage(
+                HttpStatus.BAD_REQUEST.value(),
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+    }
+
     @ExceptionHandler(EntitySaveException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorMessage saveEntityException(EntitySaveException ex, WebRequest request) {
         log.error(ex.getMessage());
         return new ErrorMessage(
-                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
@@ -51,7 +73,7 @@ public class ErrorHandler {
     public ErrorMessage entityAccessException(EntityAccessException ex, WebRequest request) {
         log.error(ex.getMessage());
         return new ErrorMessage(
-                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.FORBIDDEN.value(),
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
@@ -62,7 +84,7 @@ public class ErrorHandler {
     public ErrorMessage exception(Exception ex, WebRequest request) {
         log.error(ex.getMessage());
         return new ErrorMessage(
-                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));

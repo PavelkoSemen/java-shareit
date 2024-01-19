@@ -10,7 +10,7 @@ import java.util.Date;
 public class ErrorMessage {
     private final int statusCode;
     private final Date timestamp;
-    private final String message;
+    private final String error;
     private final String description;
 
 }
